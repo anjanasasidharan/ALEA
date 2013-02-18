@@ -29,7 +29,7 @@ import xklusac.extensions.*;
  */
 public class ExperimentSetup {
 
-    public static double powerCap = 50.00;
+    public static double powerCap = 2800.00;
     public static double totalPower = 0.00;
     /** bandwith */
     static double baudRate = 10000;

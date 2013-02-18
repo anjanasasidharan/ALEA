@@ -48,7 +48,7 @@ public class EASY_Backfilling implements SchedulingPolicy {
             GridletInfo gi = (GridletInfo) Scheduler.queue.getFirst();
             for (int j = 0; j < Scheduler.resourceInfoList.size(); j++) {
                 ResourceInfo ri = (ResourceInfo) Scheduler.resourceInfoList.get(j);
-                if (Scheduler.isSuitable(ri, gi) && ri.getNumFreePE() >= gi.getNumPE() && ExperimentSetup.totalPower + gi.getGridlet().getPower() <= ExperimentSetup.powerCap) {
+                if (Scheduler.isSuitable(ri, gi) && ri.getNumFreeNodes() >= gi.getGridlet().getNumNodes() && ExperimentSetup.totalPower + gi.getGridlet().getPower() <= ExperimentSetup.powerCap) {
                     int speed = ri.peRating;
                     if (speed > r_cand_speed) {
                         r_cand = ri;
@@ -140,14 +140,14 @@ public class EASY_Backfilling implements SchedulingPolicy {
         int r_cand_speed = 0;
         for (int j = 0; j < Scheduler.resourceInfoList.size(); j++) {
             ResourceInfo ri = (ResourceInfo) Scheduler.resourceInfoList.get(j);
-            if (Scheduler.isSuitable(ri, gi) && ri.getNumFreePE() >= gi.getNumPE() && ri.resource.getResourceID() != rsv_res.resource.getResourceID() && ExperimentSetup.totalPower + gi.getGridlet().getPower() <= ExperimentSetup.powerCap) {
+            if (Scheduler.isSuitable(ri, gi) && ri.getNumFreeNodes() >= gi.getGridlet().getNumNodes() && ri.resource.getResourceID() != rsv_res.resource.getResourceID() && ExperimentSetup.totalPower + gi.getGridlet().getPower() <= ExperimentSetup.powerCap) {
                 int speed = ri.peRating;
                 if (speed >= r_cand_speed) {
                     r_cand = ri;
                     r_cand_speed = speed;
                 }
 
-            } else if (Scheduler.isSuitable(ri, gi) && ri.getNumFreePE() >= gi.getNumPE() && ri.resource.getResourceID() == rsv_res.resource.getResourceID()) {
+            } else if (Scheduler.isSuitable(ri, gi) && ri.getNumFreeNodes() >= gi.getGridlet().getNumNodes() && ri.resource.getResourceID() == rsv_res.resource.getResourceID() && ExperimentSetup.totalPower + gi.getGridlet().getPower() <= ExperimentSetup.powerCap) {
                 double eft = GridSim.clock() + gi.getJobRuntime(ri.peRating);
                 if ((eft < rsv_res.est) || rsv_res.usablePEs >= gi.getNumPE()) {
                     int speed = ri.peRating;

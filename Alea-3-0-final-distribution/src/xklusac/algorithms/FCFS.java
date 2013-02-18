@@ -42,7 +42,7 @@ public class FCFS implements SchedulingPolicy {
             for (int j = 0; j < Scheduler.resourceInfoList.size(); j++) {
                 ResourceInfo ri = (ResourceInfo) Scheduler.resourceInfoList.get(j);
 
-                if (Scheduler.isSuitable(ri, gi) && ri.getNumFreePE() >= gi.getNumPE()) {
+                if (Scheduler.isSuitable(ri, gi) && ri.getNumFreeNodes() >= gi.getGridlet().getNumNodes()) {
 
                     r_cand = ri;
                     break;

@@ -144,6 +144,21 @@ public class ResourceInfo {
         }
         return Math.max(0, freePE);
     }
+
+     public int getNumFreeNodes()
+    {
+        int freeNodes = resource.getMachineList().size();
+        for (int j = 0; j < resInExec.size(); j++) {
+            GridletInfo gi = (GridletInfo) resInExec.get(j);
+            if (gi.getStatus() != Gridlet.SUCCESS) {
+                freeNodes = freeNodes - gi.getGridlet().getNumNodes();
+            }
+        }
+        return Math.max(0,freeNodes);
+        
+    }
+   
+    
     /*
      * Gets the number of currently working (not failed) CPUs on a resource.
      */

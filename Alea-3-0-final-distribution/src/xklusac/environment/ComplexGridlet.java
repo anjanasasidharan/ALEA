@@ -36,6 +36,7 @@ public class ComplexGridlet extends Gridlet{
     private double expectedFinishtime;
     private double percentage;
     private double power;
+    private int numNodes;
     
     
     /** Creates a new instance of ComplexGridlet representing one Job
@@ -96,6 +97,13 @@ public class ComplexGridlet extends Gridlet{
     /** Setter method */
     public void setPower(double power) {
         this.power = power;
+    }
+    public int getNumNodes() {
+        return numNodes;
+    }
+    /** Setter method */
+    public void setNumNodes(int numNodes) {
+        this.numNodes = numNodes;
     }
     /** Getter method */
     public String getArchRequired() {

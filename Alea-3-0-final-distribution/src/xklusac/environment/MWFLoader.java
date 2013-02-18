@@ -138,7 +138,8 @@ public class MWFLoader extends GridSim {
         cpu_speed.add(1000.0);
 
         if (data_set.equals("metacentrum.mwf")) {
-            start_epoch = 1230768000;
+           // start_epoch = 1230768000;
+            start_epoch =1228910203;
         } else {
             start_epoch = 1199145600;
         }
@@ -211,6 +212,15 @@ public class MWFLoader extends GridSim {
             numCPU = Integer.parseInt(values[3]);
         } catch (NumberFormatException ex) {
             numCPU = 1;
+        }
+        if (numCPU > maxPE) {
+            numCPU = maxPE;
+        }
+        int numNodes;
+        try {
+            numNodes = Integer.parseInt(values[4]);
+        } catch (NumberFormatException ex) {
+            numNodes = 1;
         }
         if (numCPU > maxPE) {
             numCPU = maxPE;
@@ -447,6 +457,7 @@ public class MWFLoader extends GridSim {
         // create one gridlet from one line in data set file
         ComplexGridlet gl = new ComplexGridlet(id, user, job_limit, new Double(length), estimatedLength, 10, 10, null, null, arrival, deadline, 1, numCPU, estimatedMachine, queue, properties, perc);
         gl.setPower(power);
+        gl.setNumNodes(numNodes);
         // and set user id to the Scheduler entity - otherwise it would be returned to the JobLoader when completed.        
         gl.setUserID(super.getEntityId("Alea_3.0_scheduler"));
         return gl;
